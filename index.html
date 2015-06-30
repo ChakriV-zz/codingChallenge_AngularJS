@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+  <link data-require="bootstrap-css@*" data-semver="3.3.1" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+</head>
+<body ng-controller="mainController as mctrl">
+<div ng-hide="mctrl.loading" class="loader">
+</div>
+<div ng-show="mctrl.loading" class="ng-hide">
+<h1> <strong>UX Society Members</strong></h1>
+<hr />
+<div class="searchContainer">
+  <div class="input-group">
+    <input type="text" class="  search-query form-control" placeholder="Search" />
+      <span class="input-group-btn">
+         <button class="btn btn-danger" type="button">
+           <span class=" glyphicon glyphicon-search"></span>
+         </button>
+      </span>
+  </div>
+</div>
+<hr />
+<div class="mainContainer">
+  <div class='row'>
+    <div  class="tableAlign col-md-8 ">
+      <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Occupation</th>
+          <th>Company</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="person in mctrl.data" ng-click="mctrl.sendIndex($index)">
+          <td>{{person.surname}} {{person.middleInitial}} {{person.firstName}}</td>
+          <td>{{person.occupation}}</td>
+          <td>{{person.company}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div  class="col-md-4 ng-hide detailContainer" ng-show="mctrl.person.id">
+      <h2>{{mctrl.person.surname}} {{mctrl.person.middleInitial}} {{mctrl.person.firstName}}</h2>
+      <img ng-src="{{mctrl.person.portrait}}">
+      <h3>*{{mctrl.person.occupation}}</h3>
+      <h3>*{{mctrl.person.company}}</h3>
+      <h3>*{{mctrl.person.email}}</h3>
+      <h3 class="motto">" {{mctrl.person.motto}} "</h3>
+    </div>
+  </div>
+</div>
+</div>
+<script data-require="angular.js@1.x" data-semver="1.4.1" src="https://code.angularjs.org/1.4.1/angular.js"></script>
+<script data-require="ui-bootstrap@*" data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+<script src="//rawgit.com/angular-ui/ui-router/0.2.15/release/angular-ui-router.js" data-semver="0.2.15" data-require="ui-router@*"></script>
+<script src="appModule.js"></script>
+<script src="mainController.js"></script>
+<script src="fetchFactory.js"></script>
+</body>
+
+</html>
